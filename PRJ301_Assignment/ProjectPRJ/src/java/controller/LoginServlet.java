@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session != null && session.getAttribute("account") != null) {
-            resp.sendRedirect(req.getContextPath() );
+            resp.sendRedirect(req.getContextPath());
             return;
         }
         // Check cookie
@@ -73,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                 if (cookie.getName().equals("name")) {
                     session = req.getSession(true);
                     session.setAttribute("name", cookie.getValue());
-                    resp.sendRedirect(req.getContextPath() );
+                    resp.sendRedirect(req.getContextPath());
                     return;
                 }
             }
@@ -102,8 +102,8 @@ public class LoginServlet extends HttpServlet {
         Cookie userCookie = new Cookie("name", u);
         Cookie passwordCookie = new Cookie("pass", p);
         //dat time ton tai
-        userCookie.setMaxAge(60 * 60 * 24 );
-        passwordCookie.setMaxAge(60 * 60 * 24 );
+        userCookie.setMaxAge(60 * 60 * 24);
+        passwordCookie.setMaxAge(60 * 60 * 24);
         //add browser cua nguoi dung
         response.addCookie(userCookie);
         response.addCookie(passwordCookie);
@@ -128,6 +128,31 @@ public class LoginServlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    public User Login(String u, String p) {
+        if (u == null || p == null) {
+            return null;
+        }
+        if (u.isEmpty() || p.isEmpty()) {
+            return null;
+        }
+        Cookie userCookie = new Cookie("name", u);
+        Cookie passwordCookie = new Cookie("pass", p);
+        UserDAO d = new UserDAO();
+        User a = d.check(u, p);
+        //dat time ton tai
+        userCookie.setMaxAge(60 * 60 * 24);
+        passwordCookie.setMaxAge(60 * 60 * 24);
+        //add browser cua nguoi dung
+        if (a == null) {
+            return null;
+        } else if (a.getRole() == 1) {
+            return a;
+
+        } else {
+            return a;
+        }
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";

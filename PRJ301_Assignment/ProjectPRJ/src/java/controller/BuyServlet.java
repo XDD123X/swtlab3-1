@@ -79,7 +79,7 @@ public class BuyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Cart cart ;
+        Cart cart;
         Object o = session.getAttribute("cart");
         //co roi 
         if (o != null) {
@@ -95,15 +95,15 @@ public class BuyServlet extends HttpServlet {
             int inum = Integer.parseInt(num);
             ProductDAO pdb = new ProductDAO();
             Product p = pdb.getProductById(id);
-             int price= p.getPrice();
+            int price = p.getPrice();
             Item t = new Item(p, inum, price);
             cart.addItem(t);
         } catch (NumberFormatException e) {
-          
+
         }
         List<Item> list = cart.getItems();
         session.setAttribute("cart", cart);
-        session.setAttribute("size", list.size()); 
+        session.setAttribute("size", list.size());
         response.sendRedirect("list");
 
     }
@@ -113,6 +113,31 @@ public class BuyServlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+    public List<Item> Buy(Object o, String num, String id) {
+        Cart cart;
+        //co roi 
+        if (o != null) {
+            cart = (Cart) o;
+        } else {
+            cart = new Cart();
+        }
+        try {
+            int inum = Integer.parseInt(num);
+            if (inum < 1) {
+                throw new NumberFormatException();
+            }
+            ProductDAO pdb = new ProductDAO();
+            Product p = pdb.getProductById(id);
+            int price = p.getPrice();
+            Item t = new Item(p, inum, price);
+            cart.addItem(t);
+        } catch (NumberFormatException e) {
+            return null;
+        }
+        List<Item> list = cart.getItems();
+        return list;
+    }
+
     @Override
     public String getServletInfo() {
         return "Short description";
