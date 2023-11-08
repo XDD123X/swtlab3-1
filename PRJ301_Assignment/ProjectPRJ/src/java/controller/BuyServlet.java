@@ -113,7 +113,7 @@ public class BuyServlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    public List<Item> Buy(Object o, String num, String id) {
+    public Cart Buy(Cart o, String num, String id) {
         Cart cart;
         //co roi 
         if (o != null) {
@@ -123,19 +123,18 @@ public class BuyServlet extends HttpServlet {
         }
         try {
             int inum = Integer.parseInt(num);
-            if (inum < 1) {
-                throw new NumberFormatException();
+            if (inum < 0) {
+                throw new Exception();
             }
             ProductDAO pdb = new ProductDAO();
             Product p = pdb.getProductById(id);
             int price = p.getPrice();
             Item t = new Item(p, inum, price);
             cart.addItem(t);
-        } catch (NumberFormatException e) {
-            return null;
+        } catch (Exception e) {
+            return o;
         }
-        List<Item> list = cart.getItems();
-        return list;
+        return cart;
     }
 
     @Override

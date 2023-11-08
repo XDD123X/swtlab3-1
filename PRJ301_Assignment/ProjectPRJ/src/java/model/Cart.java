@@ -62,4 +62,7 @@ public class Cart {
         }
         return t;
     }
+    public String toString(){
+        return items.toString();
+    }
 }

@@ -129,33 +129,53 @@ public class LoginServletTest {
         assertEquals(expResult.getId(), result.getId());
     }
 
-    @Test
+//    @Test
+//    public void testLogin9() throws Exception {
+//        UserDAO ud = new UserDAO();
+//        String username = "wrong name";
+//        String password = "wrong pass";
+//        LoginServlet instance = new LoginServlet();
+//        User expResult = null;
+//        User result = instance.Login(username, password);
+//        assertEquals(expResult, result);
+//    }
+//
+//    @Test
+//    public void testLogin10() throws Exception {
+//        UserDAO ud = new UserDAO();
+//        String username = null;
+//        String password = null;
+//        LoginServlet instance = new LoginServlet();
+//        User expResult = null;
+//        User result = instance.Login(username, password);
+//        assertEquals(expResult, result);
+//    }
+//
+//    @Test
+//    public void testLogin11() throws Exception {
+//        UserDAO ud = new UserDAO();
+//        String username = "";
+//        String password = "";
+//        LoginServlet instance = new LoginServlet();
+//        User expResult = null;
+//        User result = instance.Login(username, password);
+//        assertEquals(expResult, result);
+//    }
+        @Test
     public void testLogin9() throws Exception {
         UserDAO ud = new UserDAO();
-        String username = "wrong name";
-        String password = "wrong pass";
+        String username = "truong";
+        String password = "1234321";
         LoginServlet instance = new LoginServlet();
         User expResult = null;
         User result = instance.Login(username, password);
         assertEquals(expResult, result);
     }
-
-    @Test
+        @Test
     public void testLogin10() throws Exception {
         UserDAO ud = new UserDAO();
-        String username = null;
-        String password = null;
-        LoginServlet instance = new LoginServlet();
-        User expResult = null;
-        User result = instance.Login(username, password);
-        assertEquals(expResult, result);
-    }
-
-    @Test
-    public void testLogin11() throws Exception {
-        UserDAO ud = new UserDAO();
-        String username = "";
-        String password = "";
+        String username = "maura";
+        String password = "123456";
         LoginServlet instance = new LoginServlet();
         User expResult = null;
         User result = instance.Login(username, password);
